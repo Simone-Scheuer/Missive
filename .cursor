@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/getcursor/cursor/v0.40.0/docs/config.schema.json",
+  "name": "Missive",
+  "description": "Missive project workspace configuration for Cursor, enabling best-practice coding, tooling, and collaboration.",
+  "settings": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.exclude": [
+      "**/.git",
+      "**/.DS_Store",
+      "**/node_modules",
+      "**/dist",
+      "**/build",
+      "**/.cursor",
+      "**/.idea",
+      "**/.vscode"
+    ],
+    "files.eol": "\n"
+  },
+  "linting": {
+    "enabled": true,
+    "tools": [
+      {
+        "name": "eslint",
+        "autoRunOnSave": true,
+        "fixOnSave": true,
+        "configSearchDepth": 5
+      },
+      {
+        "name": "stylelint",
+        "autoRunOnSave": false
+      }
+    ]
+  },
+  "testing": {
+    "commands": [
+      {
+        "name": "unit",
+        "command": "npm test",
+        "allowParallel": true
+      },
+      {
+        "name": "lint",
+        "command": "npm run lint",
+        "allowParallel": true
+      }
+    ]
+  },
+  "git": {
+    "preferredBranch": "main",
+    "autoFetch": true,
+    "showDiffOnSave": true
+  },
+  "codeActions": {
+    "suggestRefactors": true,
+    "inlineSuggestions": true
+  },
+  "ai": {
+    "autoComplete": {
+      "enabled": true,
+      "maxTokens": 256
+    },
+    "chat": {
+      "enabled": true,
+      "systemPrompt": "You are working on the Missive project. Prioritize clear, maintainable code, small focused commits, and helpful documentation."
+    }
+  }
+}
+
+

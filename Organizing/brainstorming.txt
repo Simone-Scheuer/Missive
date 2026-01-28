@@ -1,0 +1,174 @@
+- no qwerty
+    - voice messages
+    - drawings
+        - digital touch style
+- when you open a message it takes up your whole screen
+    - swirly spell animation
+- **no tool tips. completely incomprehensible ui unless someone explains it to you. then it really feels like youre learning magic!**
+- **design philosophy: this doesnt show an icon of a crystal ball, it makes your phone BECOME the crystal ball**
+- SOUND EFFECTS
+- make a rune thing to connect with a new user
+    - everyone has their own rune and you need to recreate it to connect with them
+        - six runes per user, 26 possible runes,
+            - so many combinations, we’re good
+        - runes basically ur public UI
+- home page
+    - your rune and pfp at bottom. click to edit edit pfp and name, logout
+    - new connection empty rune. click to add a connection (see “New Connection Screen”)
+    - previously connected runes float around. you have to scroll around to see them all
+        - should you be able to zoom in and out?
+        - more message history = closer?
+    - if you have an unread message from someone, their rune glows
+    - click on rune to create a line from from your rune to theirs. select multiple for group chat. shake phone to “open portal” (open messaging between you and selected people)
+    
+    ![IMG_3046.jpeg](attachment:5ebd0f0b-2674-482b-bd01-6f5f138de80e:IMG_3046.jpeg)
+    
+    Adding new connections:
+    
+    - looks like top right in picture
+        - circles. can select areas to fill in a rune. that opens up rune creator screen
+            - in rune creator screen, there’s greyed out or dotted lines. select them (ideally, draw them) to make them black
+                - how should you leave the rune creator screen? press and hold?
+        - or, instead of circles that you tap, you just write their runes sequentially and they then populate the rune
+        - once you have a valid rune, their pfp appears. shake phone (or press and hold) to “cast spell” and establish connection. their pfp glows and then gets put in home screen
+    
+    ![IMG_3042.jpeg](attachment:2eef361d-7379-4e35-98a0-23d5fbf7a3cc:IMG_3042.jpeg)
+    
+
+Runes:
+
+https://symbols.cool/runes
+
+User phone number used as ID numbers since they are all unique and standard lengths? 
+
+or we generate a unique ID code? i guess google authentication handles that for us… so we could hash the gmail or something?
+
+everyone gets 6 runes generated when they create their account. under the hood, these are just letters, each mapped to a rune. 
+
+## Adding a contact flow
+
+1. User A shares code
+2. User B enters code
+3. Backend:
+    - Looks up `code`
+    - Resolves → `user_id`
+    - Creates contact link
+4. Code **never becomes the identity**
+
+Craft a Message screen
+
+- You can draw out your message. The line is glowy. Shake to send. Swipe left to see message history
+- fine, could also press and hold to send
+- Simone idea: “Whispers” as voice messages “the goblins are attacking” looks like a little magical waveform when recording and a little talking mouth when you receive it
+
+![IMG_3070.jpeg](attachment:f6fdad54-9840-4f05-be6b-d176d3ba59f6:IMG_3070.jpeg)
+
+Message History screen
+
+- swipe through backwards to see old messages. one per screen
+- sender’s rune circle surrounding their message
+- and also their name below, so it’s less of a nightmare to use
+
+![IMG_3058.jpeg](attachment:75e18a05-04e3-4030-a174-d06cbe88185c:IMG_3058.jpeg)
+
+## Project Specs, and how it aligns with Melinas vision:
+
+This application consists of a chat server and multiple chat clients (users):
+
+- Clients can send messages to other clients through the server.
+- Clients can receive messages from other clients through the server.
+- The server accepts connections from the clients.
+- The server delivers real-time messages between clients over the Internet.
+    - alas….
+
+Frontend Focus:
+
+- User Interface (UI):
+    - User authentication (registration, login, logout).
+        - kinda funny to just use Google authentication **I AGREE**
+        - but also, people probably want to be able to make multiple account for diff characters. nah this is immediately overcomplicating things nvm
+        - log out via pressing on your own rune in the home screen
+    - Allowing users to set their first and last name.
+        - fantasy name ofc
+        - and title?
+        - reset name via pressing on your own rune in the home screen
+    - Chat room creation and navigation.
+        - create via home  screen connected nodes thing, described above
+        - navigation also described above at “craft a message” and “message history” screens
+    - Displaying conversation history.
+        - swipe through backwards to see old messages. one per screen
+        - sender’s rune circle surrounds their message, and their name is below
+    - Listing all available chat rooms.
+        - uhhhh does my weird home screen idea count??
+        - there should be some way to bring up past group chats quickly
+            - press and hold on pfp to make last connection light up. swipe backwards to see previous
+    - Enable users to delete chat rooms.
+        - dramatically scribble away the connecting lines to delete, then shake (or press and hold on your runes) to confirm
+- Frontend Functionality
+    - Send and receive messages in real-time through a simulated backend.
+    - Ensure smooth navigation between different chat rooms and views.
+    - Display error messages for authentication or connection issues.
+- Ensure seamless integration with the backend for real-time messaging, authentication, and database updates
+
+Backend Focus:
+
+- Server Functionality
+    - Handle user authentication (registration, login, logout)
+    - Support storing and updating users’ first and last names in the database.
+    - Enable the creation and deletion of chat rooms.
+    - Maintain a database to store user credentials, messaging history, and a list
+    of created chat rooms and their participants.
+    - Enable real-time messaging functionality between connected clients.
+- Database Management
+    - Store and retrieve data efficiently for all features.
+    - Handle error cases, such as invalid user actions or database failures.
+- Provide robust APIs for frontend communication.
+
+# Simones random branding/greater purpose ideas
+
+Simone addition ux ideas:
+
+shaking is maybe TOO easy or too ambigupus 
+swiping forward dramatically  feels like a simple very spellcasting way to do it
+
+but also picking a random rune and having to trace it on your screen and then swipe forward feels like a very fun way to cast a spell
+
+**Time delays  - like sending a letter in real life? minutes to hours?** 
+
+You have to touch phones or scan a QR code or something to be able to add eachother?
+
+this is inconvient but immersive
+
+You have to drag and drop each letter onto the canvas?
+
+we want to place more emphasis on each message, as a back and forth, like a series of letters 
+
+We want to reintroduce intentionality and whimsy to digitial communication 
+
+Restriction  = creativity and interest - useful for couples - people seeking whimsy with new relationships 
+
+Like writing letters but smaller and more acessable and digital
+
+**Example user experience (LARP)**
+
+Open app to send a message to the 
+
+very mechanically simple but highly themed landing page 
+
+landing page contains nothing but a list of contacts, (Maybe steampunk rolodex, or like swipeable left to right portals for magic)
+
+Select one contact - be immediately prompted to create a letter - the letter can contain drawings, text, or a voice message, maybe all three? voice messages might be better seperated.
+
+“send a “whisper”” or “send a letter”  ?
+
+the user chooses to send a letter and drags and drops various symbols or text, uses a built in drawing and erasing system to draw on the screen and composes a fun little on theme message 
+
+once completed the letter sends with a cool whimsicial animation, and a time delay starts before the recipeiemt reciebes it
+
+when recieiving a letter the mailbox or mail portal of the contact it is from would glow or shake and the user would press the button and be send into a fun animation of the letter unfurling with an option to write a reply.
+
+“Just the idea of a simple but very immersive letter sending app seems pretty fun and like I could see people enjoying it to inject more whimsy Sending momo a text doesn’t feel special but a little letter saying “I love you im thinking of you” would be so cute, especially with the time delay”
+
+This has kinda huge tabletop utility - both for like “secret messages” and for inter character communication that doesnt feel likje youre just texting your frind
+
+AND for DM to player communication

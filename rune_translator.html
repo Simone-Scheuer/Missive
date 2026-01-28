@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rune Translator ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: #0a0e27;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #e8d4a8;
+        }
+
+        /* Astral Background Layers - Simplified */
+        .stars-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(180deg, #0a0e27 0%, #0f1a3a 50%, #0a0e27 100%);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            will-change: opacity;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Main Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 3em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow:
+                0 0 10px rgba(255, 215, 0, 0.5),
+                0 0 20px rgba(255, 215, 0, 0.3),
+                0 0 30px rgba(255, 215, 0, 0.2);
+            letter-spacing: 0.1em;
+            animation: titleGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                text-shadow:
+                    0 0 10px rgba(255, 215, 0, 0.5),
+                    0 0 20px rgba(255, 215, 0, 0.3),
+                    0 0 30px rgba(255, 215, 0, 0.2);
+            }
+
+            50% {
+                text-shadow:
+                    0 0 15px rgba(255, 215, 0, 0.7),
+                    0 0 30px rgba(255, 215, 0, 0.5),
+                    0 0 45px rgba(255, 215, 0, 0.3);
+            }
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: rgba(232, 212, 168, 0.6);
+            font-style: italic;
+            margin-bottom: 50px;
+            letter-spacing: 0.05em;
+        }
+
+        /* Magical Input Area */
+        .input-area {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .input-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(ellipse, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        #textInput:focus+.input-glow {
+            opacity: 1;
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.02);
+            }
+        }
+
+        #textInput {
+            width: 100%;
+            padding: 20px 30px;
+            font-size: 1.4em;
+            background: rgba(10, 14, 39, 0.4);
+            border: none;
+            border-radius: 40px;
+            color: #ffd700;
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            letter-spacing: 0.1em;
+            box-shadow:
+                inset 0 0 20px rgba(255, 215, 0, 0.1),
+                0 0 30px rgba(100, 150, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        #textInput::placeholder {
+            color: rgba(255, 215, 0, 0.3);
+            font-style: italic;
+        }
+
+        #textInput:focus {
+            outline: none;
+            box-shadow:
+                inset 0 0 30px rgba(255, 215, 0, 0.2),
+                0 0 50px rgba(255, 215, 0, 0.3);
+            background: rgba(10, 14, 39, 0.6);
+        }
+
+        /* Rune Display - Floating in Space */
+        .rune-display {
+            width: 100%;
+            max-width: 900px;
+            min-height: 300px;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .rune-display.empty::before {
+            content: "Your runes will manifest here...";
+            position: absolute;
+            color: rgba(232, 212, 168, 0.2);
+            font-style: italic;
+            font-size: 1.2em;
+            letter-spacing: 0.1em;
+        }
+
+        .rune-item {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 140px;
+            flex-shrink: 0;
+            will-change: transform;
+        }
+
+        .rune-item svg {
+            max-width: 80px;
+            max-height: 140px;
+            width: auto;
+            height: auto;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .rune-item:hover svg {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9));
+        }
+
+        /* Space Indicator */
+        .space-indicator {
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background: rgba(255, 215, 0, 0.2);
+            margin: 0 5px;
+            vertical-align: middle;
+            border-radius: 2px;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Stats */
+        .stats {
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(232, 212, 168, 0.5);
+            font-size: 1em;
+            letter-spacing: 0.05em;
+        }
+
+        /* Clear Button - Magical */
+        .clear-area {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .clear-btn {
+            padding: 12px 40px;
+            background: transparent;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+            color: rgba(255, 215, 0, 0.7);
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            letter-spacing: 0.1em;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .clear-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .clear-btn:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .clear-btn:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars-background"></div>
+    <div class="stars" id="stars"></div>
+
+    <div class="content">
+        <h1 class="title">Rune Translator</h1>
+        <p class="subtitle">Speak your words, watch them transform...</p>
+
+        <div class="input-area">
+            <input type="text" id="textInput" placeholder="Inscribe your message..." autocomplete="off">
+            <div class="input-glow"></div>
+        </div>
+
+        <div class="rune-display" id="runeDisplay"></div>
+
+        <div class="stats" id="stats"></div>
+
+        <div class="clear-area">
+            <button class="clear-btn" onclick="clearInput()">Clear Inscription</button>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const runeDisplay = document.getElementById('runeDisplay');
+        const stats = document.getElementById('stats');
+
+        // Create starfield - reduced for performance
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 40;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 1.5 + 0.5;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Load SVGs from files - using the actual SVG files with fixed spacing
+        async function loadRuneSVG(letter) {
+            try {
+                const response = await fetch(`runes_svg/Rune_${letter}.svg`);
+                if (!response.ok) {
+                    console.error(`Failed to load Rune_${letter}.svg`);
+                    return null;
+                }
+                let svgText = await response.text();
+                // Change white strokes to gold
+                svgText = svgText.replace(/stroke="white"/g, 'stroke="#ffd700"');
+                svgText = svgText.replace(/stroke='white'/g, "stroke='#ffd700'");
+                return svgText;
+            } catch (error) {
+                console.error(`Error loading Rune_${letter}.svg:`, error);
+                return null;
+            }
+        }
+
+        function clearInput() {
+            textInput.value = '';
+            updateRunes('');
+        }
+
+        async function updateRunes(text) {
+            if (!text.trim()) {
+                runeDisplay.innerHTML = '';
+                runeDisplay.classList.add('empty');
+                stats.textContent = '';
+                return;
+            }
+
+            runeDisplay.classList.remove('empty');
+            runeDisplay.innerHTML = '';
+
+            const letters = text.toUpperCase().split('');
+            let runeCount = 0;
+            let spaceCount = 0;
+
+            for (let i = 0; i < letters.length; i++) {
+                const char = letters[i];
+
+                if (char === ' ') {
+                    const spaceEl = document.createElement('span');
+                    spaceEl.className = 'space-indicator';
+                    runeDisplay.appendChild(spaceEl);
+                    spaceCount++;
+                    continue;
+                }
+
+                if (char >= 'A' && char <= 'Z') {
+                    const svgText = await loadRuneSVG(char);
+                    if (svgText) {
+                        const runeItem = document.createElement('div');
+                        runeItem.className = 'rune-item';
+
+                        // Parse the SVG and use it as-is (spacing already fixed in the files)
+                        const parser = new DOMParser();
+                        const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+                        const svg = svgDoc.querySelector('svg');
+                        if (svg) {
+                            // Keep the SVG's natural viewBox and dimensions - spacing is already fixed
+                            // Just ensure it fits within our container
+                            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                            runeItem.appendChild(svg);
+                        } else {
+                            // Fallback to innerHTML if parsing fails
+                            runeItem.innerHTML = svgText;
+                        }
+
+                        runeDisplay.appendChild(runeItem);
+                        runeCount++;
+                    }
+                } else {
+                    const charEl = document.createElement('span');
+                    charEl.style.cssText = 'color: rgba(255, 215, 0, 0.4); font-size: 1.5em; padding: 5px;';
+                    charEl.textContent = char;
+                    runeDisplay.appendChild(charEl);
+                }
+            }
+
+            if (runeCount > 0 || spaceCount > 0) {
+                stats.textContent = `${runeCount} rune${runeCount !== 1 ? 's' : ''} manifested${spaceCount > 0 ? ` • ${spaceCount} space${spaceCount !== 1 ? 's' : ''}` : ''}`;
+            }
+        }
+
+        // Real-time translation
+        textInput.addEventListener('input', async (e) => {
+            await updateRunes(e.target.value);
+        });
+
+        // Initialize
+        createStars();
+        updateRunes('');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+*Term Project:* *Instant Messaging App*
+
+Feature Document
+
+Table of Contents
+
+1      Introduction............................................................................................................... 2
+
+1.1     Purpose.................................................................................................................. 2
+
+1.2     Target Audience.................................................................................................... 2
+
+1.3     Terms and Definitions........................................................................................... 2
+
+2      Product Overview...................................................................................................... 3
+
+2.1     Product Vision....................................................................................................... 3
+
+2.2     Product Scope....................................................................................................... 3
+
+2.3     Operating Environment......................................................................................... 3
+
+2.4     Design and Implementation Constraints............................................................... 3
+
+3      User Stories................................................................................................................ 4
+
+3.1     Personas................................................................................................................ 4
+
+3.2     User Scenarios...................................................................................................... 4
+
+3.2.1        <User Scenarios with Persona 1>................................................................ 4
+
+3.2.2        <User Scenarios with Persona 2>................................................................ 4
+
+3.2.3        <User Scenarios with Persona 3>................................................................ 4
+
+3.3     Epic User Stories................................................................................................... 4
+
+3.3.1        <Epic User Stories 1>.................................................................................. 4
+
+3.3.2        <Epic User Stories 2>.................................................................................. 5
+
+3.3.3        <Epic User Stories 3>.................................................................................. 5
+
+4      Feature List................................................................................................................ 6
+
+# 1 Introduction
+
+Provide an overview of this document and the product it describes.
+
+## 1.1 Purpose
+
+Describe the purpose of this document. How will this document help you or others when developing similar product?
+
+This document is meant to give readers a clear understanding of what our product is, why we are developing it, and how we plan to develop it.
+
+## 1.2 Target Audience
+
+Describe the target audience for this document.
+
+This document is meant for the developers of the application, investors in the product, managers or decision-makers for the product, and the graders of PSU’s CS 314 class.
+
+## 1.3 Terms and Definitions
+
+Define any terms or acronyms you will be using for the rest of this document.
+
+LARP: Live Action Role-Playing. An activity where people dress up as characters and improvise stories. The fantasy genre is very popular within this hobby. 
+
+Immersion: The feeling for a LARPer that they are truly a different person in a different world. They almost forget that they are playing a game and instead feel swept away in the story. This is valued by most LARPers. Immersion can be “broken” when they witness a reminder of the real world.
+
+ugh i hate how this is written but whatever those are the main ideas
+
+# 2 Product Overview
+
+Describe the purpose of this section. Give short statement of WHAT, WHO, WHY of this this product.
+
+WHAT: a messaging app that feels as if you are working a fantastical magical device, not a piece of modern technology
+
+WHO/WHY: LARPers who wish for immersion, people who want some more whimsy amidst the sameness of modern technology
+
+## 2.1 Product Vision
+
+Describe the product vision using Moore’s vision template. (lecture slides Chapter 1 p12-16) (You can read product vision of slack: https://medium.com/@stewart/we-dont-sell-saddles-here-4c59524d650d#Web_Advice%7Ckromodor or choose your own favorites)
+
+more general version:
+
+- FOR nerds
+- WHO want their life to feel more fantasical
+- Missive is a mobile messaging app
+- THAT is designed to feel like interfacing with a magical device
+- UNLIKE Discord
+- OUR PRODUCT (statement of primary differentiation)
+
+larp specific
+
+- FOR fantasy LARPers
+- WHO want to communicate in character
+- Missive is a mobile messaging app
+- THAT is designed to feel like interfacing with a magical device
+- UNLIKE Discord
+- OUR PRODUCT does not break immersion with a modern appearance
+
+## 2.2 Product Scope
+
+Describe all the features of this product using a mind map here. You can use existing instant messaging application as an inspiration. Please be as specific as you can. This mind map should be one of your main references when actually designing sprint backlog.
+
+- Home screen
+    - your rune circle and pfp at bottom. can click to go to Settings screen
+        - general rune circle description:
+            - 2 concentric circles. the middle has about 2/3 the diameter of the outer. the middle shows the cooresponding user’s profile picture (pfp). in the ring between the inner and the outer, there are 6 “runes” evenly spaced out. each rune touches both circles and is oriented radially (the ones on the side are sideways, on the bottom are upside down). the runes are specific to each user, stored in a 6 letter code. each letter corresponds to a rune. the first letter represents the uppermost rune, and they continue clockwise
+        - for personal rune
+            - “You” label below
+    - “Construct New Portal” empty rune. click to add a new contact (see “Construct New Portal Screen”)
+        - circles are the same size as user’s rune, no filled runes, pfp is a swirl. above the rune, it is labeled “Construct New Portal”
+        - in standard zoom, “Construct New Portal” empty rune centered in the middle of the screen
+    - previously connected runes, with pfps inside and names above, float around. you can scroll around and zoom to see them all
+        - more message history = closer?
+    - if you have an unread message from someone, their rune glows
+    - click on rune to create a line from from your rune to theirs. select multiple for group chat. shake phone to open messaging between you and the selected people
+    
+    ![IMG_3046.jpeg](attachment:5ebd0f0b-2674-482b-bd01-6f5f138de80e:IMG_3046.jpeg)
+    
+- Construct New Portal screen
+    - layout description:
+        - (DECIDE)
+        - greyed out circles where the runes go. click on a circle to open up rune creator screen
+            - in Rune Creation screen, there’s greyed out or dotted lines. select them (maybe eventually, draw them) to make them black
+                - press and hold or shake screen to finish rune
+                - when you exit, the rune that you added appears in the circle
+        - OR you just write their runes sequentially up top and they then populate the rune
+            - (the orientation of the runes might be confusing)
+        - OR no seperate rune creation section. the entire rune circle has greyed out possible lines and the user can zoom in to select
+            - (the system validates individual runes once the user switches from editing that rune to a new one. once all spots have valid runes, it checks for user matches in the database)
+        - once you have a valid rune circle, their pfp appears.
+            - shake phone (or press and hold) to “cast spell” and establish connection. their pfp glows and then gets put on home screen
+    
+    ![IMG_3042.jpeg](attachment:2eef361d-7379-4e35-98a0-23d5fbf7a3cc:IMG_3042.jpeg)
+    
+- Craft a Message screen
+    - You can draw out your message. The line is glowy.
+        - if we have time, buttons to select color, brush size, and eraser. tap with 2 fingers to undo
+    - Can also press and hold a button to record a voice message
+    - Shake (or press and hold) to send. Swipe left to see message history
+
+![IMG_3070.jpeg](attachment:f6fdad54-9840-4f05-be6b-d176d3ba59f6:IMG_3070.jpeg)
+
+- Message History screen
+    - swipe through backwards to see old messages. one per screen
+    - swipe forwards to return to newer messages
+    - if new messages get sent while reading older messages, they get added to the far right
+        - a faint glow appears on that side of the screen until they are read?
+    - can return to “Craft a message screen” if you swipe past the newest message
+    - sender’s rune circle surrounding their message, their name below
+    - glowing unread messages fade when you view them?
+
+![IMG_3058.jpeg](attachment:75e18a05-04e3-4030-a174-d06cbe88185c:IMG_3058.jpeg)
+
+- log-in screen just uses google authentication
+    - when they log in for the first time, prompted to add name and pfp
+- settings screen has
+    - log out
+    - change name
+    - change pfp
+    - option to turn off sounds
+    - MAYBE switch character option?
+        - new name, pfp, message history, contacts
+- runes info
+    - everyone has a unique sequence of 6 runes, generated during account creation (plus with new characters if we add that). under the hood, valid runes are mapped to letters. they are detected based on which line segments are selected to create it
+    - (M has been changed from pic below. now 8, 10, 11, 12)
+    
+    ![IMG_0103.png](attachment:2f45eebe-79bd-4d22-aa02-a72c9598935d:IMG_0103.png)
+    
+    ![Screenshot 2026-01-22 at 11.22.31 AM.png](attachment:e5e282bf-833a-43ca-8d00-30626eeda070:Screenshot_2026-01-22_at_11.22.31_AM.png)
+    
+- other
+    - sound effects throughout
+    - swirly or fading animations when transitioning between screens
+
+## 2.3 Operating Environment
+
+Describe the operating environment this product requires.
+
+## 2.4 Design and Implementation Constraints
+
+When considering implementing all the features in 2.2, what are the languages, libraries, frameworks or platforms you are going to use? Describe the constraints you might have when designing and implementing the product using these tools.
+
+# 3 User Stories
+
+Describe the purpose of this section. Why is it necessary to understand users’ needs when developing product? How many efforts should be made?
+
+## 3.1 Personas
+
+# Stelio Kontos
+
+- Stelio Kontos is a 28-year-old board game manager in Seattle, Washington.
+- He is the primary community organizer for events at the store and also participates actively in them.
+- His main hobbies are playing tabletop roleplaying games and board games, and he also enjoys practicing drawing and occasionally attending LARP events.
+- He particularly enjoys the technical (crunchy) aspects of these hobbies.
+- As the manager of the store, he regularly communicates with his employees and community members via the work and community Discord servers.
+- He is highly comfortable with technology and is used to navigating complex online gaming systems.
+- He typically engages in short sessions of 1–2 message exchanges, often for affirmational or comedic purposes.
+- His main goal in using *Missive* is to enhance community engagement and maintain immersion during games.
+- He is frustrated by products that disrupt immersion or make coordinating community interactions difficult.
+- To work around these frustrations, he uses *Missive*’s flexible messaging and drawing features to send quick, context-sensitive notes.
+- He particularly enjoys using *Missive*’s drawing tools to send fun, customized messages to employees, store regulars, and friends, and to send secret messages to players while dungeon mastering.
+- This allows him to facilitate engagement, inject humor, and maintain the immersive experience of the game while keeping everyone connected.
+- TLDR: social butterlfy community manager likes to use it to send funny compliments to employees and  messages for enhancing tabletop game immersion.
+
+# Newt Mcfadden
+
+- Newt Mcfadden is a 18 year old high school senior in San Diego Calfironia. They are involved community theater productions.
+- In their free time they like to preform improv and attend local LARP events, as well as make and photograph cosplay.
+- Their favorite thing about these activities is the immersive and improvisational aspect.
+- They are in constant communication with their friends and theater mates, over imessages, discord and instagram.
+- They are comfortable but not highly engaged with technical aspects of their technology.
+- Uses Missive in “letter” style, higher complexity time distant back-and-forths with their romantic partner, as well as for immersive communication during Larp Events, where they play as a sneaky rogue
+- Their Main goal for missive is to intorudce more intentional and whimsical communication to their relaitonship, as well as to facilitate immersive espionage role-play during larp events.  (sending emergency messages etc)
+- They are frustrated by how communicating long distance can feel impersonal and make communication feel less special as well as how immersion breaking using typical messaging is during larp, and how there arent many viable alternatives to facilitate the kind of fantasy they are looking for.
+- Missive adderesses these frustrations by allowing them to send immersive, heavily themed messages to their partner. They particulalry enjoy the hand drawn and time delay options to make the messages feel more special, signifigant, and like real letters. By proviidng a fully immersive UI and UX, Missive also allows Newt to facilitate their fantasy of playing as a scout, by letting them share information to other users in the larp instantenously without breaking their immerison.
+
+TLDR: Whimsy loving high schooler likes to use it to send more complex affirmational letters and drawings to their long distance partner, as well as for roleplaying espionage and scouting during tabletop games. They utilize a custom phone case to maximize the immersiveness, but wish there was a dark mode. 
+
+Newt McFadden is a 18 year old high school senior in San Diego, California. They are an avid theater enjoyer and also participate heavily in local improv and Larp events. Their primary 
+
+# Jessica Molasses
+
+- Tldr: 41yr old engineer, active parent and LARP / REN FAIRE enthusiast, loves to use Missive for roleplaying as as a wizard and for communicating cutely with her kids.
+
